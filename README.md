@@ -37,7 +37,7 @@ A personal developer portfolio built with Next.js, React, TypeScript, and Tailwi
 Clone the repository and install its dependencies:
 
 ```bash
-git clone https://github.com/muhammad-abdusalam/my-portfolio.git
+git clone https://github.com/devmuhammadadam/my-portfolio.git
 cd my-portfolio
 npm install
 ```
