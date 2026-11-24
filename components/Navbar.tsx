@@ -108,7 +108,7 @@ export default function Navbar() {
             aria-label={isEnglish ? "Switch to Arabic" : "Switch to English"}
             className={controlClass}
           >
-            {isEnglish ? "AR" : "EN"}
+            {isEnglish ? "عربي" : "EN"}
           </button>
 
           <button
