@@ -110,7 +110,7 @@ export default function Hero() {
           </div>
 
           <div className="p-4 sm:p-5">
-            <div className="overflow-x-auto rounded-xl bg-slate-950 p-4 font-mono text-xs leading-7 text-slate-200 sm:p-5 sm:text-sm">
+            <div className="overflow-x-auto rounded-xl dark:bg-slate-950 p-4 font-mono text-xs leading-7 text-slate-200 sm:p-5 sm:text-sm">
               <p>
                 <span className="text-purple-300">const</span>{" "}
                 <span className="text-sky-300">developer</span> = {"{"}
