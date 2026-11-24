@@ -8,32 +8,32 @@ export default function Hero() {
 
   const content = {
     en: {
-      greeting: "Hi, I’m",
+      greeting: "Hi, I'm",
       name: "Muhammad Adam",
+      role: "Full-Stack Developer",
       description:
-        "Frontend Developer building modern, interactive web interfaces that combine thoughtful design, high performance, and usability with Next.js.",
+        "I build modern web applications using React, Next.js, TypeScript, and Supabase. I focus on writing clean, maintainable code and creating responsive, user-friendly experiences while continuously developing my software engineering and full-stack skills.",
       projects: "Explore My Projects",
       contact: "Contact Me",
       resume: "Download Resume (PDF)",
-      role: "Frontend Developer",
-      work: "Open to Work",
       codeName: "Muhammad Adam",
-      codeRole: "Frontend Developer",
-      codePassion: "Building for the web",
+      codeRole: "Full-Stack Developer",
+      codePassion: "Building web applications",
+      codeFocus: "Frontend & Backend",
     },
     ar: {
       greeting: "مرحبًا، أنا",
       name: "محمد آدم",
+      role: "مطور Full-Stack",
       description:
-        "مطور ويب، أبني واجهات ويب حديثة وتفاعلية تجمع بين التصميم المتقن والأداء العالي وسهولة الاستخدام، باستخدام Next.js.",
+        "أعمل على بناء تطبيقات ويب حديثة باستخدام React وNext.js وTypeScript وSupabase. أهتم بكتابة كود نظيف يسهل صيانته، وتطوير تجارب استخدام متجاوبة وسهلة، مع مواصلة تطوير مهاراتي في هندسة البرمجيات وتطوير التطبيقات المتكاملة.",
       projects: "استكشف مشاريعي",
       contact: "تواصل معي",
       resume: "تنزيل السيرة الذاتية (PDF)",
-      role: "مطور ويب",
-      work: "متاح للعمل",
       codeName: "محمد آدم",
-      codeRole: "مطور ويب",
-      codePassion: "بناء مواقع ويب",
+      codeRole: "مطور Full-Stack",
+      codePassion: "بناء تطبيقات ويب",
+      codeFocus: "الواجهات والخلفية",
     },
   };
 
@@ -42,15 +42,23 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 md:grid-cols-2 md:gap-12 md:py-24 lg:gap-16 lg:px-10 lg:py-28"
+      aria-labelledby="hero-title"
+      className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 md:grid-cols-2 md:gap-12 md:py-24 lg:gap-16 lg:px-10 lg:py-20"
     >
       <div>
-        <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1
+          id="hero-title"
+          className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+        >
           {text.greeting}
           <span className="mt-2 block text-primary">{text.name}</span>
         </h1>
 
-        <p className="mt-5 max-w-xl text-lg leading-8 text-muted">
+        <p className="mt-4 text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+          {text.role}
+        </p>
+
+        <p className="mt-5 max-w-xl text-base leading-8 text-muted sm:text-lg">
           {text.description}
         </p>
 
@@ -83,7 +91,7 @@ export default function Hero() {
 
       <div
         aria-hidden="true"
-        className="relative hidden min-h-80 items-center justify-center overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-hero-glow via-background to-surface-secondary p-6 sm:p-8 md:flex"
+        className="relative hidden min-h-80 items-center justify-center overflow-hidden rounded-3xl border border-border bg-linear-to-br from-hero-glow via-background to-surface-secondary p-6 sm:p-8 md:flex"
       >
         <div className="absolute -right-12 -top-12 size-40 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-12 -left-12 size-40 rounded-full bg-accent/10 blur-3xl" />
@@ -102,7 +110,7 @@ export default function Hero() {
           </div>
 
           <div className="p-4 sm:p-5">
-            <div className="overflow-x-auto rounded-xl dark:bg-[#0b1428] p-4 font-mono text-xs leading-7 text-slate-200 sm:p-5 sm:text-sm">
+            <div className="overflow-x-auto rounded-xl bg-slate-950 p-4 font-mono text-xs leading-7 text-slate-200 sm:p-5 sm:text-sm">
               <p>
                 <span className="text-purple-300">const</span>{" "}
                 <span className="text-sky-300">developer</span> = {"{"}
@@ -129,13 +137,17 @@ export default function Hero() {
                 <span className="text-emerald-300">
                   {JSON.stringify(text.codePassion)}
                 </span>
+                ,
+              </p>
+
+              <p className="pl-4">
+                <span className="text-sky-200">focus</span>:{" "}
+                <span className="text-emerald-300">
+                  {JSON.stringify(text.codeFocus)}
+                </span>
               </p>
 
               <p>{"};"}</p>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between gap-3 text-xs text-muted">
-              <span>JavaScript</span>
             </div>
           </div>
         </div>

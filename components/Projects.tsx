@@ -1,34 +1,28 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const projects = [
-  {
-    id: "task-manager",
-    title: {
-      en: "Task Manager",
-      ar: "إدارة المهام",
-    },
-    description: {
-      en: "A demo task management app for organizing tasks and tracking progress.",
-      ar: "تطبيق تجريبي لتنظيم المهام ومتابعة مستوى الإنجاز.",
-    },
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
-    type: "tasks",
-  },
-  {
-    id: "weather-app",
-    title: {
-      en: "Weather App",
-      ar: "تطبيق الطقس",
-    },
-    description: {
-      en: "A demo weather interface designed to display current weather information.",
-      ar: "واجهة تجريبية لعرض معلومات حالة الطقس بطريقة واضحة.",
-    },
-    technologies: ["React", "API", "CSS"],
-    type: "weather",
-  },
+type ProjectStatus = "completed" | "in-progress" | "planned";
+
+type Project = {
+  id: string;
+  title: {
+    en: string;
+    ar: string;
+  };
+  description: {
+    en: string;
+    ar: string;
+  };
+  status: ProjectStatus;
+  technologies: string[];
+  image: string;
+  liveDemo?: string;
+  githubUrl?: string;
+};
+
+const projects: Project[] = [
   {
     id: "personal-portfolio",
     title: {
@@ -36,117 +30,95 @@ const projects = [
       ar: "الموقع الشخصي",
     },
     description: {
-      en: "A personal website to showcase skills, projects, and development progress.",
-      ar: "موقع شخصي لعرض المهارات والمشاريع والتطور في مجال البرمجة.",
+      en: "A responsive personal portfolio website showcasing my projects, technical skills, and development journey. It features Arabic and English language support, light and dark themes, and a contact form with backend integration.",
+      ar: "موقع شخصي متجاوب لعرض مشاريعي ومهاراتي التقنية ورحلتي في تطوير البرمجيات. يدعم اللغتين العربية والإنجليزية، والوضعين الفاتح والداكن، ويتضمن نموذج تواصل متصلًا بالخلفية البرمجية.",
     },
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    type: "portfolio",
+    status: "completed",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Resend",
+      "Upstash Redis",
+    ],
+    image: "/images/projects/personal-portfolio.jpeg",
+    liveDemo: "https://muhammadadam.vercel.app/",
+    githubUrl: "https://github.com/devmuhammadadam/my-portfolio",
+  },
+  {
+    id: "tanaghum",
+    title: {
+      en: "Tanaghum",
+      ar: "تَناغُم",
+    },
+    description: {
+      en: "A SaaS project and team management platform for small software teams. It is being developed to bring workspaces, projects, task management, Kanban boards, and team collaboration together in one organized platform.",
+      ar: "منصة SaaS لإدارة المشاريع وفرق العمل الصغيرة، يجري تطويرها لتجمع مساحات العمل والمشاريع وإدارة المهام ولوحات Kanban والتعاون بين أعضاء الفريق داخل منصة واحدة منظمة.",
+    },
+    status: "in-progress",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+    ],
+    image: "/images/projects/tanaghum.jpeg",
+  },
+  {
+    id: "ecommerce",
+    title: {
+      en: "E-Commerce",
+      ar: "متجر إلكتروني",
+    },
+    description: {
+      en: "A planned e-commerce focused on providing an organized online shopping experience, with product browsing and purchasing features.",
+      ar: "مشروع مستقبلي لمتجر إلكتروني يهدف إلى توفير تجربة تسوق منظمة، مع إمكانية استعراض المنتجات وشرائها.",
+    },
+    status: "planned",
+    technologies: [],
+    image: "/images/projects/e-commerce.jpeg",
   },
 ];
 
 const content = {
   en: {
-    eyebrow: "SOME OF MY WORK",
+    eyebrow: "SELECTED WORK",
     title: "My Projects",
     description:
-      "A selection of projects showcasing my ability to build modern, interactive, and user-focused web experiences.",
-    demo: "Live Demo",
+      "A selection of projects that reflect my technical skills, practical experience, and journey toward building useful web applications.",
+    statuses: {
+      completed: "Completed",
+      "in-progress": "In Progress",
+      planned: "Planned",
+    },
+    technologies: "Technologies",
+    liveDemo: "Live Demo",
     github: "GitHub",
-    placeholder: "Demo project",
-    unavailable: "Link will be added later",
   },
   ar: {
-    eyebrow: "نماذج من أعمالي",
+    eyebrow: "أعمال مختارة",
     title: "مشاريعي",
     description:
-      "استكشف مجموعة من مشاريعي التي تعكس مهاراتي في تطوير واجهات ويب حديثة، تجمع بين التصميم المتقن والأداء العالي وسهولة الاستخدام.",
-    demo: "معاينة المشروع",
+      "مجموعة من المشاريع التي تعكس مهاراتي التقنية وتطبيقي العملي لما أتعلمه ورحلتي نحو بناء تطبيقات ويب مفيدة.",
+    statuses: {
+      completed: "مكتمل",
+      "in-progress": "قيد التطوير",
+      planned: "مخطط له",
+    },
+    technologies: "التقنيات المستخدمة",
+    liveDemo: "معاينة المشروع",
     github: "GitHub",
-    placeholder: "مشروع تجريبي",
-    unavailable: "ستُضاف الروابط لاحقًا",
   },
 };
 
-function ProjectPreview({ type }: { type: string }) {
-  if (type === "tasks") {
-    return (
-      <div
-        aria-hidden="true"
-        className="flex h-full min-h-44 flex-col gap-3 rounded-xl border border-border bg-background p-4"
-      >
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-24 rounded-full bg-foreground/15" />
-          <div className="size-6 rounded-lg bg-primary/15" />
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-lg bg-primary/10 p-2">
-            <div className="h-2 w-8 rounded-full bg-primary/40" />
-            <div className="mt-3 h-4 w-5 rounded bg-primary/20" />
-          </div>
-          <div className="rounded-lg bg-surface-secondary p-2">
-            <div className="h-2 w-8 rounded-full bg-foreground/20" />
-            <div className="mt-3 h-4 w-5 rounded bg-foreground/10" />
-          </div>
-          <div className="rounded-lg bg-surface-secondary p-2">
-            <div className="h-2 w-8 rounded-full bg-foreground/20" />
-            <div className="mt-3 h-4 w-5 rounded bg-foreground/10" />
-          </div>
-        </div>
-        {[0, 1, 2].map((item) => (
-          <div key={item} className="flex items-center gap-2">
-            <div className="size-3 rounded border border-border-strong" />
-            <div
-              className={`h-2 rounded-full bg-foreground/10 ${
-                item === 1 ? "w-2/5" : "w-3/5"
-              }`}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (type === "weather") {
-    return (
-      <div
-        aria-hidden="true"
-        className="flex h-full min-h-44 flex-col items-center justify-center rounded-xl bg-gradient-to-br from-sky-500/15 via-primary/10 to-indigo-500/15 p-4"
-      >
-        <div className="text-4xl" aria-hidden="true">
-          ☀️
-        </div>
-        <div className="mt-2 h-3 w-20 rounded-full bg-foreground/20" />
-        <div className="mt-3 h-8 w-16 rounded-lg bg-foreground/10" />
-        <div className="mt-3 flex gap-3">
-          <div className="h-2 w-8 rounded-full bg-foreground/10" />
-          <div className="h-2 w-8 rounded-full bg-foreground/10" />
-          <div className="h-2 w-8 rounded-full bg-foreground/10" />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      aria-hidden="true"
-      className="flex h-full min-h-44 flex-col justify-between rounded-xl border border-border bg-background p-4"
-    >
-      <div className="flex items-center justify-between">
-        <div className="h-3 w-24 rounded-full bg-foreground/15" />
-        <div className="flex gap-1">
-          <div className="size-2 rounded-full bg-primary/50" />
-          <div className="size-2 rounded-full bg-foreground/15" />
-          <div className="size-2 rounded-full bg-foreground/15" />
-        </div>
-      </div>
-      <div>
-        <div className="h-3 w-3/4 rounded-full bg-primary/30" />
-        <div className="mt-2 h-3 w-1/2 rounded-full bg-foreground/15" />
-        <div className="mt-4 h-7 w-20 rounded-lg bg-primary/15" />
-      </div>
-    </div>
-  );
-}
+const statusStyles: Record<ProjectStatus, string> = {
+  completed: "border-emerald-500/20 bg-emerald-500/10 text-emerald-500",
+  "in-progress": "border-blue-500/20 bg-blue-500/10 text-blue-400",
+  planned: "border-border bg-surface-secondary text-muted",
+};
 
 export default function Projects() {
   const { language } = useLanguage();
@@ -156,7 +128,7 @@ export default function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+      className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14"
     >
       <div className="mx-auto max-w-3xl text-center">
         <p className="mb-3 text-sm font-semibold tracking-widest text-primary">
@@ -175,19 +147,30 @@ export default function Projects() {
         </p>
       </div>
 
-      <ul className="mt-10 grid gap-6 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <li key={project.id}>
-            <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-primary/40 motion-reduce:transition-none sm:p-5">
-              <ProjectPreview type={project.type} />
+            <article className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 transition-all duration-200 hover:border-primary/40 hover:bg-surface-secondary/50 motion-reduce:transition-none sm:p-6">
+              <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-xl bg-surface-secondary">
+                <Image
+                  src={project.image}
+                  alt={project.title[language]}
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
+                />
+              </div>
 
-              <div className="flex flex-1 flex-col pt-5">
-                <div className="mb-3 flex items-center justify-between gap-3">
-                  <h3 className="text-lg font-bold text-foreground">
+              <div className="flex flex-1 flex-col">
+                <div className="mb-5 flex items-start justify-between gap-3">
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">
                     {project.title[language]}
                   </h3>
-                  <span className="shrink-0 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-                    {text.placeholder}
+
+                  <span
+                    className={`shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium ${statusStyles[project.status]}`}
+                  >
+                    {text.statuses[project.status]}
                   </span>
                 </div>
 
@@ -195,41 +178,55 @@ export default function Projects() {
                   {project.description[language]}
                 </p>
 
-                <ul
-                  aria-label={
-                    language === "ar"
-                      ? "التقنيات المستخدمة"
-                      : "Technologies used"
-                  }
-                  className="mt-4 flex flex-wrap gap-2"
-                >
-                  {project.technologies.map((technology) => (
-                    <li
-                      key={technology}
-                      className="rounded-lg border border-border bg-surface-secondary px-2.5 py-1.5 text-xs font-medium text-foreground"
+                {project.technologies.length > 0 && (
+                  <div className="mt-6">
+                    <p className="mb-3 text-xs font-medium text-muted">
+                      {text.technologies}
+                    </p>
+
+                    <ul
+                      aria-label={text.technologies}
+                      className="flex flex-wrap gap-2"
                     >
-                      {technology}
-                    </li>
-                  ))}
-                </ul>
+                      {project.technologies.map((technology) => (
+                        <li
+                          key={technology}
+                          className="rounded-lg border border-border bg-background/50 px-2.5 py-1.5 text-xs font-medium text-foreground/80"
+                        >
+                          {technology}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="mt-auto flex flex-wrap gap-3 pt-5">
-                  <span
-                    title={text.unavailable}
-                    aria-disabled="true"
-                    className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl bg-primary/10 px-3 py-2 text-sm font-semibold text-primary/60"
-                  >
-                    {text.demo}
-                  </span>
+                {(project.liveDemo || project.githubUrl) && (
+                  <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                    {project.liveDemo && (
+                      <a
+                        href={project.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg bg-primary/10 px-3.5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                      >
+                        {text.liveDemo}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
 
-                  <span
-                    title={text.unavailable}
-                    aria-disabled="true"
-                    className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm font-semibold text-muted"
-                  >
-                    {text.github}
-                  </span>
-                </div>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg border border-border px-3.5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-background/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                      >
+                        {text.github}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </article>
           </li>

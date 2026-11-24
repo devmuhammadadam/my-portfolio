@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
   const { language } = useLanguage();
   const isArabic = language === "ar";
-  const [currentYear, setCurrentYear] = useState(2026);
+  const currentYear = new Date().getFullYear();
 
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const linkClassName =
+    "rounded-md text-muted transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
   return (
     <footer className="border-t border-border bg-background px-5 py-6 sm:px-8">
@@ -18,19 +16,39 @@ export default function Footer() {
         <p className="text-center text-sm leading-6 text-muted">
           {isArabic
             ? `© ${currentYear} محمد آدم، جميع الحقوق محفوظة.`
-            : `© ${currentYear} Muhammad Adam, All rights reserved.`}
+            : `© ${currentYear} Muhammad Adam. All rights reserved.`}
         </p>
 
         <nav
-          aria-label={isArabic ? "روابط التواصل الاجتماعي" : "Social links"}
+          aria-label={isArabic ? "روابط التواصل" : "Contact and social links"}
           className="flex items-center gap-5"
         >
           <a
-            href="https://github.com/muhammad-abdusalam"
+            href="mailto:muhammad.adam4078@gmail.com"
+            aria-label={isArabic ? "البريد الإلكتروني" : "Email"}
+            className={linkClassName}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="h-5 w-5"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+          </a>
+
+          <a
+            href="https://github.com/devmuhammadadam"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="rounded-md text-muted transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className={linkClassName}
           >
             <svg
               viewBox="0 0 24 24"
@@ -43,11 +61,11 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/muhammad-abdusalam/"
+            href="https://www.linkedin.com/in/devmuhammadadam/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="rounded-md text-muted transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className={linkClassName}
           >
             <svg
               viewBox="0 0 24 24"

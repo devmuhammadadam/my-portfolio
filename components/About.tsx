@@ -4,33 +4,32 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 export default function About() {
   const { language } = useLanguage();
-  const isEnglish = language === "en";
 
   const content = {
     en: {
       eyebrow: "A LITTLE ABOUT ME",
       title: "About Me",
       paragraphs: [
-        "I'm Muhammad Adam, a Frontend Developer passionate about building modern web experiences that combine clean design, high performance, and usability. I work on turning ideas and designs into interactive, responsive interfaces using React and Next.js, with a focus on writing clean, well-structured, and maintainable code.",
-        "I pay close attention to detail and strive to deliver digital experiences that work seamlessly across devices, while continuously improving my skills and building web products that provide real value to users.",
+        "I'm Muhammad Adam, a Full-Stack Developer passionate about building modern web applications and understanding how software works from frontend to backend.",
+        "I enjoy turning ideas into practical products, writing clean and maintainable code, and continuously improving my skills through hands-on projects. I'm particularly interested in software engineering principles, application architecture, and creating reliable experiences that deliver real value to users.",
       ],
       highlights: [
         {
-          title: "What I enjoy",
+          title: "What I Focus On",
           description:
-            "Building interfaces with React and improving the user experience.",
+            "Building full-stack web applications with clean architecture and maintainable code.",
           icon: "code",
         },
         {
-          title: "Learning by doing",
+          title: "How I Learn",
           description:
-            "Developing my skills through projects and solving practical problems.",
+            "Learning through building real projects and solving practical engineering problems.",
           icon: "projects",
         },
         {
-          title: "My goal",
+          title: "My Approach",
           description:
-            "Creating reliable, user-friendly interfaces and growing as a web developer.",
+            "Creating reliable, accessible, and user-focused software through continuous improvement.",
           icon: "target",
         },
       ],
@@ -39,25 +38,26 @@ export default function About() {
       eyebrow: "نبذة عني",
       title: "من أنا",
       paragraphs: [
-        "أنا محمد آدم، مطور واجهات أمامية (Frontend Developer) مهتم ببناء تطبيقات ويب حديثة تجمع بين التصميم الجذاب والأداء العالي وسهولة الاستخدام. أعمل على تحويل الأفكار والتصاميم إلى واجهات تفاعلية ومتجاوبة باستخدام React وNext.js، مع التركيز على كتابة كود نظيف ومنظم وقابل للتطوير.",
-        "أحرص على الاهتمام بالتفاصيل وتقديم تجارب رقمية تعمل بكفاءة على مختلف الأجهزة، وأسعى باستمرار إلى تطوير مهاراتي وبناء منتجات ويب تقدم قيمة حقيقية للمستخدمين.",
+        "أنا محمد آدم، مطور Full-Stack مهتم ببناء تطبيقات ويب حديثة وفهم كيفية عمل البرمجيات بدءًا من الواجهات الأمامية وحتى الأنظمة الخلفية.",
+        "أستمتع بتحويل الأفكار إلى منتجات عملية، وكتابة كود نظيف وقابل للصيانة، وتطوير مهاراتي باستمرار من خلال تنفيذ المشاريع. أهتم بشكل خاص بمبادئ هندسة البرمجيات، وتصميم معمارية التطبيقات، وبناء تجارب موثوقة تقدم قيمة حقيقية للمستخدمين.",
       ],
       highlights: [
         {
-          title: "اهتمامي الأساسي",
-          description: "React، تطوير مواقع الويب، وتحسين تجربة المستخدم.",
+          title: "ما أركز عليه",
+          description:
+            "بناء تطبيقات ويب متكاملة بكود منظم ومعمارية قابلة للصيانة.",
           icon: "code",
         },
         {
-          title: "التعلم بالممارسة",
+          title: "كيف أتعلم",
           description:
-            "تطوير مهاراتي من خلال المشاريع والتعامل مع المشكلات العملية.",
+            "التعلم من خلال بناء المشاريع والتعامل مع المشكلات الهندسية العملية.",
           icon: "projects",
         },
         {
-          title: "هدفي المهني",
+          title: "منهجي في العمل",
           description:
-            "بناء منتجات موثوقة وسهلة الاستخدام، والاستمرار في التطور كمطور ويب.",
+            "بناء برمجيات موثوقة وسهلة الاستخدام مع التطوير والتحسين المستمر.",
           icon: "target",
         },
       ],
@@ -70,7 +70,7 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+      className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20"
     >
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div>
