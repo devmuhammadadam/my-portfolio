@@ -21,34 +21,66 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-  : undefined;
+const siteUrl = new URL(
+  process.env.NEXT_PUBLIC_SITE_URL || "https://muhammadadam.vercel.app",
+);
+
+const siteTitle = "Muhammad Adam | Full-Stack Developer";
+
+const siteDescription =
+  "Muhammad Adam is a Full-Stack Developer building modern, responsive web applications using React, Next.js, TypeScript, and Supabase.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+
   title: {
-    default: "Muhammad Adam | Frontend Developer",
+    default: siteTitle,
     template: "%s | Muhammad Adam",
   },
-  description:
-    "Muhammad Adam is a frontend developer building modern, accessible, and responsive web experiences.",
+
+  description: siteDescription,
+
   applicationName: "Muhammad Adam Portfolio",
+
   authors: [{ name: "Muhammad Adam" }],
+
   creator: "Muhammad Adam",
+
+  publisher: "Muhammad Adam",
+
+  keywords: [
+    "Muhammad Adam",
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Supabase",
+    "Web Development",
+    "Portfolio",
+  ],
+
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
     type: "website",
-    title: "Muhammad Adam | Frontend Developer",
-    description:
-      "Explore Muhammad Adam's portfolio, projects, and Frontend development skills.",
+    url: "/",
+    title: siteTitle,
+    description: siteDescription,
     siteName: "Muhammad Adam Portfolio",
     locale: "en_US",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Muhammad Adam | Frontend Developer",
-    description:
-      "Explore Muhammad Adam's portfolio, projects, and Frontend development skills.",
+    title: siteTitle,
+    description: siteDescription,
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
