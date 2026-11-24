@@ -1,27 +1,31 @@
 # Muhammad Adam — Developer Portfolio
 
-A personal developer portfolio built with Next.js, React, TypeScript, and Tailwind CSS. It showcases my skills, projects, and contact information in a responsive, bilingual experience.
+A personal developer portfolio built with **Next.js, React, TypeScript, and Tailwind CSS**. It showcases my technical skills, selected projects, and contact information through a modern, responsive, bilingual experience.
+
+**Live Website:** [muhammadadam.vercel.app](https://muhammadadam.vercel.app/)
 
 ## Features
 
-- **Bilingual interface:** Arabic and English.
-- **RTL/LTR support:** Layout direction adapts to the selected language.
-- **Light and dark themes:** Switch between light and dark appearances.
-- **Responsive design:** Optimized for desktop, tablet, and mobile screens.
+- **Bilingual Interface:** Supports Arabic and English.
+- **RTL/LTR Support:** Automatically adapts layout direction based on the selected language.
+- **Light and Dark Themes:** Switch between light and dark appearances.
+- **Responsive Design:** Optimized for desktop, tablet, and mobile devices.
 - **Accessibility:** Includes accessibility-conscious interface patterns and reduced-motion support.
-- **Projects and skills:** Dedicated sections for showcasing development work and technical skills.
-- **Contact form:** Server-side email delivery using Resend.
-- **Rate limiting:** Request protection using Upstash Redis and Ratelimit.
-- **SEO foundations:** Metadata and other search-engine optimization essentials.
+- **Projects and Skills:** Dedicated sections showcasing development projects and technical skills.
+- **Contact Form:** Server-side email delivery using Resend.
+- **Rate Limiting:** Protects the contact endpoint using Upstash Redis and Ratelimit.
+- **SEO Foundations:** Includes metadata, sitemap, robots configuration, and other search-engine optimization essentials.
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org/)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Resend](https://resend.com/)
-- [Upstash Redis](https://upstash.com/)
+| Technology                                    | Purpose              |
+| --------------------------------------------- | -------------------- |
+| [Next.js](https://nextjs.org/)                | React framework      |
+| [React](https://react.dev/)                   | UI development       |
+| [TypeScript](https://www.typescriptlang.org/) | Type-safe JavaScript |
+| [Tailwind CSS](https://tailwindcss.com/)      | Styling              |
+| [Resend](https://resend.com/)                 | Email delivery       |
+| [Upstash Redis](https://upstash.com/)         | Rate limiting        |
 
 ## Getting Started
 
@@ -34,13 +38,20 @@ A personal developer portfolio built with Next.js, React, TypeScript, and Tailwi
 
 ### Installation
 
-Clone the repository and install its dependencies:
+Clone the repository:
 
 ```bash
-git clone https://github.com/muhammad-abdusalam/my-portfolio.git
+git clone https://github.com/devmuhammadadam/my-portfolio.git
 cd my-portfolio
+```
+
+Install dependencies:
+
+```bash
 npm install
 ```
+
+### Environment Variables
 
 Create a `.env.local` file in the project root:
 
@@ -51,7 +62,11 @@ UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_rest_token
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-Replace the example values with your own configuration. Never commit real API keys or credentials.
+Replace the example values with your actual configuration.
+
+**Security Notice:** Never commit `.env.local`, API keys, or other sensitive credentials to the repository.
+
+### Run Locally
 
 Start the development server:
 
@@ -63,49 +78,46 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
-```bash
-npm run dev
-npm run build
-npm run start
-npm run lint
-```
+| Command         | Description                                   |
+| --------------- | --------------------------------------------- |
+| `npm run dev`   | Starts the development server.                |
+| `npm run build` | Creates an optimized production build.        |
+| `npm run start` | Starts the production server after building.  |
+| `npm run lint`  | Runs the project's configured linting checks. |
 
-- `npm run dev` — starts the development server.
-- `npm run build` — creates a production build.
-- `npm run start` — starts the production server after building.
-- `npm run lint` — runs the project's configured linting checks.
+## Contact Form
 
-## Contact Form Configuration
-
-The contact form submits to the server-side endpoint:
+The contact form submits requests to the server-side API endpoint:
 
 ```text
 /api/contact
 ```
 
-Email delivery is handled by Resend.
+Email delivery is handled by Resend, while Upstash Redis and Ratelimit provide request protection.
 
-- Configure `RESEND_API_KEY` in `.env.local`.
+### Configuration
+
+- Set `RESEND_API_KEY` in `.env.local`.
 - The current test sender is `onboarding@resend.dev`.
-- Sending emails to the public from a production deployment may require a verified domain and an appropriately configured sender address in Resend.
-- The recipient address is configured in the server-side contact route.
-- Rate limiting uses Upstash Redis and Ratelimit, with a limit of five requests per IP address within ten minutes.
-- The rate limiter is configured to reject requests when its required service is unavailable.
+- Production email delivery may require a verified domain and a properly configured sender address in Resend.
+- The recipient email address is configured in the server-side contact route.
+- Rate limiting allows up to **5 requests per IP address within 10 minutes**.
+- The rate limiter uses a fail-closed approach: requests are rejected if the required rate-limiting service is unavailable.
 
-Do not expose secret environment variables in client-side code or commit them to the repository.
+Keep all secret credentials on the server. Never expose them through client-side code.
 
 ## Deployment
 
-The project is intended to be deployed to [Vercel](https://vercel.com/).
+The portfolio is deployed using [Vercel](https://vercel.com/).
 
-Before deploying:
+To deploy your own instance:
 
-1. Push the reviewed project to GitHub.
+1. Push the project repository to GitHub.
 2. Import the repository into Vercel.
-3. Configure the required environment variables in the deployment settings.
-4. Set `NEXT_PUBLIC_SITE_URL` to the production website URL.
-5. Configure and verify the production sender domain in Resend if required.
-6. Confirm that the contact form, rate limiting, language switching, themes, and production build work as expected.
+3. Configure the required environment variables in Vercel's project settings.
+4. Set `NEXT_PUBLIC_SITE_URL` to your production website URL.
+5. Configure and verify your production sender domain in Resend if required.
+6. Deploy the project and verify that the production build, contact form, rate limiting, language switching, and theme switching work correctly.
 
 ## Copyright
 
