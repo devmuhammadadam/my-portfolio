@@ -5,6 +5,12 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 type FormStatus = "idle" | "error" | "sending" | "success";
 
+type FieldErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
 export default function Contact() {
   const { language } = useLanguage();
   const isArabic = language === "ar";
@@ -15,6 +21,7 @@ export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const content = {
     title: isArabic
@@ -36,15 +43,31 @@ export default function Contact() {
     success: isArabic
       ? "تم إرسال رسالتك بنجاح. شكرًا لتواصلك!"
       : "Your message was sent successfully. Thank you for reaching out!",
-    required: isArabic
-      ? "يرجى ملء جميع الحقول المطلوبة."
-      : "Please complete all required fields.",
+    required: isArabic ? "هذا الحقل مطلوب." : "This field is required.",
     invalidEmail: isArabic
       ? "يرجى إدخال بريد إلكتروني صحيح."
       : "Please enter a valid email address.",
     genericError: isArabic
       ? "تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى."
       : "Unable to send your message. Please try again.",
+    validationError: isArabic
+      ? "يرجى مراجعة البيانات المدخلة والمحاولة مرة أخرى."
+      : "Please check your submitted information and try again.",
+    payloadError: isArabic
+      ? "حجم الطلب أكبر من الحد المسموح به. يرجى تقليل حجم الرسالة."
+      : "Your request is too large. Please shorten your message.",
+    contentTypeError: isArabic
+      ? "تعذّر معالجة الطلب. يرجى تحديث الصفحة والمحاولة مرة أخرى."
+      : "The request format is not supported. Please refresh the page and try again.",
+    rateLimitError: isArabic
+      ? "لقد تجاوزت الحد المسموح للرسائل. يرجى المحاولة بعد 10 دقائق."
+      : "Too many messages. Please try again in 10 minutes.",
+    serviceError: isArabic
+      ? "خدمة التواصل غير متاحة مؤقتًا. يرجى المحاولة لاحقًا."
+      : "The contact service is temporarily unavailable. Please try again later.",
+    emailError: isArabic
+      ? "تعذّر إرسال البريد الإلكتروني حاليًا. يرجى المحاولة لاحقًا."
+      : "Unable to deliver your message right now. Please try again later.",
   };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -59,16 +82,21 @@ export default function Contact() {
     const trimmedEmail = email.trim();
     const trimmedMessage = message.trim();
 
-    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
-      setErrorMessage(content.required);
-      setStatus("error");
-      return;
-    }
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(trimmedEmail)) {
-      setErrorMessage(content.invalidEmail);
+    const nextFieldErrors: FieldErrors = {
+      name: !trimmedName ? content.required : undefined,
+      email: !trimmedEmail
+        ? content.required
+        : !emailPattern.test(trimmedEmail)
+          ? content.invalidEmail
+          : undefined,
+      message: !trimmedMessage ? content.required : undefined,
+    };
+
+    setFieldErrors(nextFieldErrors);
+
+    if (Object.values(nextFieldErrors).some(Boolean)) {
       setStatus("error");
       return;
     }
@@ -88,17 +116,44 @@ export default function Contact() {
         }),
       });
 
-      const result: { success?: boolean; error?: string } =
-        await response.json();
+      const result: { success?: boolean } | null = await response
+        .json()
+        .catch(() => null);
 
-      if (!response.ok || !result.success) {
-        throw new Error("Message sending failed.");
+      if (!response.ok || result?.success !== true) {
+        let error = content.genericError;
+
+        switch (response.status) {
+          case 400:
+            error = content.validationError;
+            break;
+          case 413:
+            error = content.payloadError;
+            break;
+          case 415:
+            error = content.contentTypeError;
+            break;
+          case 429:
+            error = content.rateLimitError;
+            break;
+          case 502:
+            error = content.emailError;
+            break;
+          case 503:
+            error = content.serviceError;
+            break;
+        }
+
+        setErrorMessage(error);
+        setStatus("error");
+        return;
       }
 
       setStatus("success");
       setName("");
       setEmail("");
       setMessage("");
+      setFieldErrors({});
     } catch {
       setErrorMessage(content.genericError);
       setStatus("error");
@@ -108,11 +163,24 @@ export default function Contact() {
   const inputClasses =
     "w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
+  function clearFieldError(field: keyof FieldErrors) {
+    setFieldErrors((current) => ({
+      ...current,
+      [field]: undefined,
+    }));
+
+    if (status !== "sending") {
+      setStatus("idle");
+    }
+
+    setErrorMessage("");
+  }
+
   return (
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24"
+      className="px-5 py-10 sm:px-8 sm:py-14"
     >
       <div className="mx-auto max-w-3xl">
         <div className="mx-auto mb-10 max-w-2xl text-center">
@@ -155,14 +223,25 @@ export default function Contact() {
                 value={name}
                 onChange={(event) => {
                   setName(event.target.value);
-                  if (status !== "sending") setStatus("idle");
-                  setErrorMessage("");
+                  clearFieldError("name");
                 }}
                 placeholder={content.namePlaceholder}
                 className={inputClasses}
                 disabled={status === "sending"}
-                aria-invalid={status === "error" && !name.trim()}
+                aria-invalid={Boolean(fieldErrors.name)}
+                aria-describedby={
+                  fieldErrors.name ? "contact-name-error" : undefined
+                }
               />
+
+              {fieldErrors.name && (
+                <p
+                  id="contact-name-error"
+                  className="mt-2 text-sm text-red-600 dark:text-red-400"
+                >
+                  {fieldErrors.name}
+                </p>
+              )}
             </div>
 
             <div>
@@ -184,18 +263,25 @@ export default function Contact() {
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
-                  if (status !== "sending") setStatus("idle");
-                  setErrorMessage("");
+                  clearFieldError("email");
                 }}
                 placeholder={content.emailPlaceholder}
                 className={inputClasses}
                 disabled={status === "sending"}
-                aria-invalid={
-                  status === "error" &&
-                  (!email.trim() ||
-                    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={
+                  fieldErrors.email ? "contact-email-error" : undefined
                 }
               />
+
+              {fieldErrors.email && (
+                <p
+                  id="contact-email-error"
+                  className="mt-2 text-sm text-red-600 dark:text-red-400"
+                >
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
 
             <div>
@@ -215,14 +301,25 @@ export default function Contact() {
                 value={message}
                 onChange={(event) => {
                   setMessage(event.target.value);
-                  if (status !== "sending") setStatus("idle");
-                  setErrorMessage("");
+                  clearFieldError("message");
                 }}
                 placeholder={content.messagePlaceholder}
                 className={`${inputClasses} min-h-36 resize-y`}
                 disabled={status === "sending"}
-                aria-invalid={status === "error" && !message.trim()}
+                aria-invalid={Boolean(fieldErrors.message)}
+                aria-describedby={
+                  fieldErrors.message ? "contact-message-error" : undefined
+                }
               />
+
+              {fieldErrors.message && (
+                <p
+                  id="contact-message-error"
+                  className="mt-2 text-sm text-red-600 dark:text-red-400"
+                >
+                  {fieldErrors.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -236,7 +333,7 @@ export default function Contact() {
             </p>
           )}
 
-          {status === "error" && (
+          {status === "error" && errorMessage && (
             <p
               role="alert"
               className="mt-5 rounded-xl border border-red-500/40 p-3 text-sm leading-6 text-red-600 dark:text-red-400"
