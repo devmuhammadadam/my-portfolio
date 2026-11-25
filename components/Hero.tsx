@@ -43,7 +43,7 @@ export default function Hero() {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 md:grid-cols-2 md:gap-12 md:py-24 lg:gap-16 lg:px-10 lg:py-20"
+      className="mx-auto grid min-h-svh w-full max-w-7xl items-center gap-12 px-5 py-16 sm:min-h-screen sm:px-8 sm:py-20 md:min-h-0 md:grid-cols-2 md:gap-12 md:py-24 lg:gap-16 lg:px-10 lg:py-20"
     >
       <div>
         <h1
