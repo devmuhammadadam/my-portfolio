@@ -1,6 +1,8 @@
-# Muhammad Adam — Developer Portfolio
+# Muhammad Adam — Frontend Developer Portfolio
 
-A personal developer portfolio built with **Next.js, React, TypeScript, and Tailwind CSS**. It showcases my technical skills, selected projects, and contact information through a modern, responsive, bilingual experience.
+A personal portfolio showcasing my work as a **Frontend Developer**, focused on building modern, responsive web applications and creating seamless user experiences.
+
+I work with **React, Next.js, and TypeScript** to develop frontend applications and integrate them with backend services. My approach emphasizes clean code, maintainable architecture, performance, accessibility, and building complete, functional web products.
 
 **Live Website:** [muhammadadam.vercel.app](https://muhammadadam.vercel.app/)
 

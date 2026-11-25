@@ -25,10 +25,10 @@ const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL || "https://muhammadadam.vercel.app",
 );
 
-const siteTitle = "Muhammad Adam | Full-Stack Developer";
+const siteTitle = "Muhammad Adam | Frontend Developer";
 
 const siteDescription =
-  "Muhammad Adam is a Full-Stack Developer building modern, responsive web applications using React, Next.js, TypeScript, and Supabase.";
+  "Muhammad Adam is a Frontend Developer building modern, responsive web applications with React, Next.js, and TypeScript, with a focus on seamless backend integration and complete web application development.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -50,11 +50,14 @@ export const metadata: Metadata = {
 
   keywords: [
     "Muhammad Adam",
-    "Full-Stack Developer",
+    "Frontend Developer",
+    "Frontend Development",
     "React",
     "Next.js",
     "TypeScript",
     "Supabase",
+    "Backend Integration",
+    "Full-Stack Web Applications",
     "Web Development",
     "Portfolio",
   ],

@@ -10,14 +10,14 @@ export default function About() {
       eyebrow: "A LITTLE ABOUT ME",
       title: "About Me",
       paragraphs: [
-        "I'm Muhammad Adam, a Full-Stack Developer passionate about building modern web applications and understanding how software works from frontend to backend.",
-        "I enjoy turning ideas into practical products, writing clean and maintainable code, and continuously improving my skills through hands-on projects. I'm particularly interested in software engineering principles, application architecture, and creating reliable experiences that deliver real value to users.",
+        "I'm Muhammad Adam, a Frontend Developer passionate about building modern web applications and creating seamless user experiences through well-designed interfaces and effective backend integration.",
+        "I enjoy turning ideas into complete, functional products, working across frontend development and backend services, and writing clean, maintainable code. I'm particularly interested in software engineering principles, application architecture, and building reliable applications that deliver real value to users.",
       ],
       highlights: [
         {
           title: "What I Focus On",
           description:
-            "Building full-stack web applications with clean architecture and maintainable code.",
+            "Building complete web applications through modern frontend development and effective backend integration.",
           icon: "code",
         },
         {
@@ -29,7 +29,7 @@ export default function About() {
         {
           title: "My Approach",
           description:
-            "Creating reliable, accessible, and user-focused software through continuous improvement.",
+            "Creating reliable, maintainable, and user-focused software through continuous improvement.",
           icon: "target",
         },
       ],
@@ -38,14 +38,14 @@ export default function About() {
       eyebrow: "نبذة عني",
       title: "من أنا",
       paragraphs: [
-        "أنا محمد آدم، مطور Full-Stack مهتم ببناء تطبيقات ويب حديثة وفهم كيفية عمل البرمجيات بدءًا من الواجهات الأمامية وحتى الأنظمة الخلفية.",
-        "أستمتع بتحويل الأفكار إلى منتجات عملية، وكتابة كود نظيف وقابل للصيانة، وتطوير مهاراتي باستمرار من خلال تنفيذ المشاريع. أهتم بشكل خاص بمبادئ هندسة البرمجيات، وتصميم معمارية التطبيقات، وبناء تجارب موثوقة تقدم قيمة حقيقية للمستخدمين.",
+        "أنا محمد آدم، مطور واجهات أمامية شغوف ببناء تطبيقات ويب حديثة وتقديم تجارب استخدام متكاملة من خلال واجهات مصممة بعناية وتكامل فعّال مع الخدمات الخلفية.",
+        "أستمتع بتحويل الأفكار إلى منتجات عملية ومتكاملة، والعمل على تطوير الواجهات وربطها بالخدمات الخلفية، وكتابة كود منظم وقابل للصيانة. أهتم بشكل خاص بمبادئ هندسة البرمجيات، ومعمارية التطبيقات، وبناء تطبيقات موثوقة تقدم قيمة حقيقية للمستخدمين.",
       ],
       highlights: [
         {
           title: "ما أركز عليه",
           description:
-            "بناء تطبيقات ويب متكاملة بكود منظم ومعمارية قابلة للصيانة.",
+            "بناء تطبيقات ويب متكاملة من خلال تطوير واجهات حديثة وربطها بالخدمات الخلفية.",
           icon: "code",
         },
         {
@@ -57,7 +57,7 @@ export default function About() {
         {
           title: "منهجي في العمل",
           description:
-            "بناء برمجيات موثوقة وسهلة الاستخدام مع التطوير والتحسين المستمر.",
+            "بناء برمجيات موثوقة وقابلة للصيانة وتركز على احتياجات المستخدمين مع التطوير المستمر.",
           icon: "target",
         },
       ],
